@@ -192,6 +192,7 @@ df_ml['pret_prezis'] = df_model['pret_prezis']
 rezultat = df_ml[['brand', 'ram', 'storage', 'price', 'pret_prezis']].head(20)
 print(rezultat)
 
+# Testam fara brand pentru a ne asigura ca nu exista bias dupa brand
 X_no_brand = X.drop(columns=[c for c in X.columns if c.startswith("brand_")])
 
 X_train, X_test, y_train, y_test = train_test_split(
@@ -201,6 +202,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 model.fit(X_train, y_train)
 
 print("R² fără brand:", model.score(X_test, y_test))
+
 
 df_ml['diferenta'] = df_ml['pret_prezis'] - df_ml['price']
 
